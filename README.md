@@ -1,21 +1,21 @@
 # Eff2Emt
 EverQuest Eff2Emt Zone Sounds Converter (Command Line)
 
-Command-Line Usage Examples
+Command-Line Usage Examples:
 
-  Eff2Emt akheva_sounds.eff
+  * Eff2Emt akheva_sounds.eff
 
-  Eff2Emt firiona
+  * Eff2Emt firiona
 
-  Eff2Emt freport?
+  * Eff2Emt freport?
 
-  Eff2Emt felwith*
+  * Eff2Emt felwith*
 
-  Eff2Emt *
+  * Eff2Emt *
 
-  Eff2Emt C:\Games\EQTitanium\soldung*
+  * Eff2Emt C:\Games\EQTitanium\soldung*
 
-  Eff2Emt ..\q*
+  * Eff2Emt ..\q*
 
 Notes:
 
