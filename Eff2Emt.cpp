@@ -46,23 +46,24 @@ int _tmain(int argc, _TCHAR* argv[])
 
     if (_fileList == INVALID_HANDLE_VALUE)
     {
-        wprintf(L"Error: No %s file%s found in the %s.\n", _find.c_str(), ((_find.find_first_of(L"*?") == std::wstring::npos) ? L" was" : L"s were"), ((_path == L"") ? L"current directory" : L"specified location"));
+        wprintf(L"Error: No %s file%s found in the %s.\n",
+            _find.c_str(),
+            ((_find.find_first_of(L"*?") == std::wstring::npos) ? L" was" : L"s were"),
+            ((_path == L"") ? L"current directory" : L"specified location"));
 
         return 1;
     }
 
     const wchar_t* _fullPath = _path.c_str();
-    wchar_t _filename[MAX_PATH];
 
     do
     {
         // Strip down to just the zone nick
-        wcsncpy(_filename, _fileFound.cFileName, MAX_PATH);
-        wmemchr(_filename, '_', MAX_PATH)[0] = NULL;
+        wmemchr(_fileFound.cFileName, '_', MAX_PATH)[0] = NULL;
 
-        std::string _filenameAscii = String::WideToASCII(_filename);
+        std::string _filenameAscii = String::WideToASCII(_fileFound.cFileName);
 
-        switch (Eff2EmtConverter::ConvertZone(_fullPath, _filename, _filenameAscii))
+        switch (Eff2EmtConverter::ConvertZone(_fullPath, _fileFound.cFileName, _filenameAscii))
         {
             case DialogResult::OK:
                 printf("Converted Zone Sounds For: %s\n", _filenameAscii.c_str());
