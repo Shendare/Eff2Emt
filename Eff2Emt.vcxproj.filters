@@ -24,12 +24,18 @@
     <ClInclude Include="Eff2Emt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Eff2EmtConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Eff2Emt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Eff2EmtConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
