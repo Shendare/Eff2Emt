@@ -18,68 +18,46 @@ int _tmain(int argc, _TCHAR* argv[])
         return 0;
     }
 
-    std::wstring _path = argv[1];
-    std::wstring _zones = _path;
+    std::wstring _path = GetFullPathFrom(argv[1]);
+    std::wstring _find = GetFileSpecFrom(argv[1]);
 
-    int _sep = _path.find_last_of(L"/\\:");
-
-    if (_sep == std::wstring::npos)
-    {
-        _path = L"";
-    }
-    else
-    {
-        _path.erase(_sep);
-        _zones.erase(0, _sep + 1);
-    }
-
-    _sep = _zones.find_first_of(L"_.");
-
+    // Trim off any _sounds or _sndbnk and any file extention from the filespec
+    int _sep = _find.find_first_of(L"_.");
     if (_sep != std::wstring::npos)
     {
-        _zones.erase(_sep);
+        _find.erase(_sep);
     }
 
-    _zones += L"_sounds.eff";
+    // We're looking for *_sounds.eff
+    _find += L"_sounds.eff";
 
-    if ((_path.length() + _zones.length() + 1) >= MAX_PATH)
+    if ((_path.length() + _find.length() + 1) >= MAX_PATH)
     {
-        printf("Error: Specified directory name is too long.\n");
+        printf("Error: Specified directory name is too long.\n"); // I suppose it could happen in a Send To situation...
 
         return 1;
     }
 
     WIN32_FIND_DATA _fileFound;
-    wchar_t _fullPath[MAX_PATH];
+    _find = _path + L"\\" + _find;
 
-    std::wstring _search;
-
-    if (_path == L"")
-    {
-        GetCurrentDirectory(MAX_PATH, _fullPath);
-        _search = _zones;
-    }
-    else
-    {
-        _wfullpath(_fullPath, _path.c_str(), MAX_PATH);
-        _search = _path + L"\\" + _zones;
-    }
-
-    HANDLE _fileList = FindFirstFile(_search.c_str(), &_fileFound);
+    // Find our ZoneNick_sounds.eff file(s)
+    HANDLE _fileList = FindFirstFile(_find.c_str(), &_fileFound);
 
     if (_fileList == INVALID_HANDLE_VALUE)
     {
-        wprintf(L"Error: No %s file%s found in the %s.\n", _zones.c_str(), ((_zones.find_first_of(L"*?") == std::wstring::npos) ? L" was" : L"s were"), ((_path == L"") ? L"current directory" : L"specified location"));
+        wprintf(L"Error: No %s file%s found in the %s.\n", _find.c_str(), ((_find.find_first_of(L"*?") == std::wstring::npos) ? L" was" : L"s were"), ((_path == L"") ? L"current directory" : L"specified location"));
 
         return 1;
     }
 
+    const wchar_t* _fullPath = _path.c_str();
+    wchar_t _filename[MAX_PATH];
+
     do
     {
-        wchar_t _filename[MAX_PATH];
-
+        // Strip down to just the zone nick
         wcsncpy(_filename, _fileFound.cFileName, MAX_PATH);
-
         wmemchr(_filename, '_', MAX_PATH)[0] = NULL;
 
         std::string _filenameAscii = String::WideToASCII(_filename);
@@ -96,4 +74,40 @@ int _tmain(int argc, _TCHAR* argv[])
     FindClose(_fileList);
 
     return 0;
+}
+
+std::wstring GetFullPathFrom(std::wstring Path)
+{
+    wchar_t _fullPath[MAX_PATH];
+
+    int _sep = Path.find_last_of(L"/\\:");
+
+    if (_sep == std::wstring::npos)
+    {
+        GetCurrentDirectory(MAX_PATH, _fullPath);
+    }
+    else
+    {
+        // Resolve relative path to absolute
+
+        Path.erase(_sep);
+
+        _wfullpath(_fullPath, Path.c_str(), MAX_PATH);
+    }
+
+    return _fullPath;
+}
+
+std::wstring GetFileSpecFrom(std::wstring Path)
+{
+    int _sep = Path.find_last_of(L"/\\:");
+
+    if (_sep == std::wstring::npos)
+    {
+        return L"";
+    }
+    else
+    {
+        return Path.erase(0, _sep + 1);
+    }
 }
