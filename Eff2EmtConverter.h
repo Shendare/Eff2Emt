@@ -1,4 +1,22 @@
-// Eff2EmtConverter Classes
+/*
+*  Eff2EmtConverter Classes - Header file for Eff2EmtConverter class
+*
+*  By Shendare (Jon D. Jackson)
+*
+*  Portions of this code not covered by another author's or entity's copyright are released under
+*  the Creative Commons Zero (CC0) public domain license.
+*
+*  To the extent possible under law, Shendare (Jon D. Jackson) has waived all copyright and
+*  related or neighboring rights to this EQIconExtractor application.
+*  This work is published from: The United States.
+*
+*  You may copy, modify, and distribute the work, even for commercial purposes, without asking permission.
+*
+*  For more information, read the CC0 summary and full legal text here:
+*
+*  https://creativecommons.org/publicdomain/zero/1.0/
+*
+*/
 
 #include <fstream>
 #include <sstream>

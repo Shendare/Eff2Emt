@@ -1,3 +1,23 @@
+/*
+*  Eff2EmtConverter.cpp - Class for handling conversion of old EverQuest ZoneNick_sounds.eff and ZoneNick_sndbnk.eff to editable ZoneNick.emt text files
+*
+*  By Shendare (Jon D. Jackson)
+*
+*  Portions of this code not covered by another author's or entity's copyright are released under
+*  the Creative Commons Zero (CC0) public domain license.
+*
+*  To the extent possible under law, Shendare (Jon D. Jackson) has waived all copyright and
+*  related or neighboring rights to this EQIconExtractor application.
+*  This work is published from: The United States.
+*
+*  You may copy, modify, and distribute the work, even for commercial purposes, without asking permission.
+*
+*  For more information, read the CC0 summary and full legal text here:
+*
+*  https://creativecommons.org/publicdomain/zero/1.0/
+*
+*/
+
 #include "Eff2EmtConverter.h"
 
 const char* Eff2EmtConverter::EMTLineFormat = ";?,SoundFile (wav=sound mp3/xmi=music),Unknown (0=OK 1=OK),WhenActive (0=Always 1=Daytime 2=Nighttime),Volume (1.0 = 100%),FadeInMS,FadeOutMS,WavLoopType (0=Constant 1=Delayed Repeat),X,Y,Z,WavFullVolRadius,WavMaxAudibleDist,NonZero = RandomizeLocation,ActivationRange,MinRepeatDelay,MaxRepeatDelay,xmiIndex,EchoLevel (50 = Max),IsEnvSound (for option toggle)";
