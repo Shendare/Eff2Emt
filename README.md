@@ -30,7 +30,7 @@ GUI Version: https://github.com/Shendare/Eff2EmtGUI
 
 >Portions of this software's code not covered by another author's or entity's copyright are released under the Creative Commons Zero (CC0) public domain license.
 
->To the extent possible under law, Shendare (Jon D. Jackson) has waived all copyright and related or neighboring rights to this EQ-Zip application. This work is published from: The United States.
+>To the extent possible under law, Shendare (Jon D. Jackson) has waived all copyright and related or neighboring rights to this Eff2Emt application. This work is published from: The United States.
 
 >You may copy, modify, and distribute the work, even for commercial purposes, without asking permission.
 
